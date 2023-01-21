@@ -19,7 +19,7 @@ class WhatsAppWrapper:
 
     def send_template_message(self, template_name, language_code, phone_number):
 
-        payload = json.dumps({
+        payload = {
             "messaging_product": "whatsapp",
             "to": phone_number,
             "type": "template",
@@ -29,13 +29,39 @@ class WhatsAppWrapper:
                     "code": language_code
                 }
             }
-        })
+        }
 
-        response = requests.request("POST", f"{self.API_URL}/messages", headers=self.headers, data=payload)
+        response = requests.post(f"{self.API_URL}/messages", json=payload,headers=self.headers)
 
         assert response.status_code == 200, "Error sending message"
 
         return response.status_code
+
+    def send(self, token, to, template_name, language_code):
+        url = 'https://graph.facebook.com/v15.0/111679144885464/messages'
+        headers = {
+            'Authorization': f'Bearer {token}',
+            'Content-Type': 'application/json'
+        }
+        data = {
+            "messaging_product": 'whatsapp',
+            "to": to,
+            "type": "template",
+            "template": {
+                "name": template_name,
+                "language": {
+                    "code": language_code
+                }
+            }
+        }
+        response = requests.post(url, json=data, headers=headers)
+        
+        print("\n" + str(response.json()))
+
+        assert response.status_code == 200, "Error sending message"
+
+        return response.status_code
+
 
     def process_webhook_notification(self, data):
         """_summary_: Process webhook notification
@@ -55,3 +81,9 @@ class WhatsAppWrapper:
                 )
 
         return response
+
+
+if __name__ == "__main__":
+    client = WhatsAppWrapper()
+    client.send_template_message("hello_world", "en_US", os.environ.get("WHATSAPP_NUMBER_WEBHOOK_TEST"))
+    
