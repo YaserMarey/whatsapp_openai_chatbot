@@ -33,6 +33,8 @@ class WhatsAppWrapper:
 
         response = requests.post(f"{self.API_URL}/messages", json=payload,headers=self.headers)
 
+        print(response)
+        
         assert response.status_code == 200, "Error sending message"
 
         return response.status_code
