@@ -57,6 +57,6 @@ def webhook_whatsapp():
     
     # Do anything with the response
     # Send it back for now, should be submitted to ChatGPT
-    client.send_template_message("hello_world", "en_US", os.environ.get("WHATSAPP_NUMBER_WEBHOOK_TEST"))
+    # client.send_template_message("hello_world", "en_US", os.environ.get("WHATSAPP_NUMBER_WEBHOOK_TEST"))
 
     return jsonify({"status": "success"}, 200)
