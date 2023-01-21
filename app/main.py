@@ -10,7 +10,7 @@ VERIFY_TOKEN = os.environ.get('WHATSAPP_HOOK_TOKEN')
 
 @app.route("/")
 def hello_world():
-    return "Hello World!"
+    return "Hello World!!"
 
 
 @app.route("/send_message/", methods=["POST"])
