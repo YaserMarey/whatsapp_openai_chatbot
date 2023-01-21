@@ -56,5 +56,8 @@ def webhook_whatsapp():
     client.process_webhook_notification(request.get_json())
     
     # Do anything with the response
+    # Send it back
+    client.send_template_message("hello_world", "en_US", os.environ.get("WHATSAPP_NUMBER_WEBHOOK_TEST"))
+    
 
     return jsonify({"status": "success"}, 200)
