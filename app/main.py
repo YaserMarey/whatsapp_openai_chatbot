@@ -53,7 +53,8 @@ def webhook_whatsapp():
 
     client = WhatsAppWrapper()
 
-    client.process_webhook_notification(request.get_json())
+    response = client.process_webhook_notification(request.get_json())
+    print ("We received " + str(response))
     
     # Do anything with the response
     # Send it back for now, should be submitted to ChatGPT
