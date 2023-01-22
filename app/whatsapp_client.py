@@ -75,8 +75,8 @@ class WhatsAppWrapper:
                                 print(f"Ack from FastAPI-WtsApp Webhook: {message_body}")
                                 return {
                                     "statusCode": 200,
-                                    "body": json.dump(prompt),
-                                    "from_no": json.dump(from_no),
+                                    "body": prompt,
+                                    "from_no": from_no,
                                     "isBase64Encoded": False
                                 }
 
