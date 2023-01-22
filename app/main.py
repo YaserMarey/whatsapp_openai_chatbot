@@ -55,11 +55,11 @@ def webhook_whatsapp():
     wtsapp_client = WhatsAppWrapper()
     response = wtsapp_client.process_webhook_notification(request.get_json())
     print ("We received " + str(response))
-    if response.statusCode == 200:
-        if response.body and response.from_no:
+    if response["statusCode"] == 200:
+        if response["body"] and response["from_no"]:
                   openai_client = OpenAIWrapper()
-                  reply = openai_client.complete(prompt=response.body)
-                  wtsapp_client.send_text_message(to=response.from_no, message=reply)
+                  reply = openai_client.complete(prompt=response["body"])
+                  wtsapp_client.send_text_message(to=response["from_no"], message=reply)
                   print ("We replied with " + str(response))
 
     return jsonify({"status": "success"}, 200)
