@@ -15,14 +15,14 @@ def hello_world():
 
 @app.get("/webhook/")
 def subscribe(request: Request):
-    if request.args.get('hub.verify_token') == VERIFY_TOKEN:
-        return request.args.get('hub.challenge')
+    if request.query_params.get('hub.verify_token') == VERIFY_TOKEN:
+        return request.query_params.get('hub.challenge')
     return "Authentication failed. Invalid Token."
 
 @app.post("/webhook/")
 def process_notifications(request: Request):
     wtsapp_client = WhatsAppWrapper()
-    response = wtsapp_client.process_webhook_notification(request.get_json())
+    response = wtsapp_client.process_webhook_notification(request.json())
     print ("We received " + str(response))
     if response["statusCode"] == 200:
         if response["body"] and response["from_no"]:
