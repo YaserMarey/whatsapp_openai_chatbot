@@ -69,7 +69,7 @@ class WhatsAppWrapper:
                                 from_ = message["from"]
                                 message_body = message["text"]["body"]
                                 reply_message = f"Ack from FastAPI-WtsApp Webhook: {message_body}"
-                                
+                                client = WhatsAppWrapper()
                                 client.send_text_message(phone_number_id, reply_message)
                                 return {
                                     "statusCode": 200,
