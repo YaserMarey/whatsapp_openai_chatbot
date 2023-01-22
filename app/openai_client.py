@@ -7,10 +7,8 @@ import json
 
 class OpenAIWrapper:
 
-    OPENAI_API_KEY = os.environ.get("OPENAI_API_KEY")
-
     def __init__(self):
-        pass
+        openai.api_key = os.environ.get("OPENAI_API_KEY")
 
     def complete(self, prompt):
 
