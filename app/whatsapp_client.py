@@ -59,6 +59,7 @@ class WhatsAppWrapper:
         """_summary_: Process webhook notification
         For the moment, this will return the type of notification
         """
+        print(str(data))
         entries = data["entry"]
         for entry in entries:
             for change in entry["changes"]:
