@@ -2,6 +2,7 @@
 
 ## Installation
 
+
 Make sure to have an `.env` file with the following variables:
 
 ```shell
