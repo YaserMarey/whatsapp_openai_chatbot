@@ -56,10 +56,16 @@ def webhook_whatsapp():
     response = wtsapp_client.process_webhook_notification(request.get_json())
     print ("We received " + str(response))
     if response["statusCode"] == 200:
+        print ("\n1")
         if response["body"] and response["from_no"]:
-                  openai_client = OpenAIWrapper()
-                  reply = openai_client.complete(prompt=response["body"])
-                  wtsapp_client.send_text_message(to=response["from_no"], message=reply)
-                  print ("We replied with " + str(response))
+            print ("\n2")
+            openai_client = OpenAIWrapper()
+            print ("\n3")
+            reply = openai_client.complete(prompt=response["body"])
+            print ("\n4")
+            print ("\nreply is "  + reply)
+            wtsapp_client.send_text_message(to=response["from_no"], message=reply)
+            print ("\n5")
+            print ("We replied with " + str(response))
 
     return jsonify({"status": "success"}, 200)

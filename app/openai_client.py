@@ -10,6 +10,7 @@ import json
 class OpenAIWrapper:
     def __init__(self):
         openai.api_key = os.environ.get("OPENAI_API_KEY")
+        print ("\nopenai key is" + openai.api_key + " and its type is " + openai.api_type)
 
     def complete(self, prompt):
 
