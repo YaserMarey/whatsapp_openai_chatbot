@@ -9,18 +9,15 @@ app = FastAPI()
 
 VERIFY_TOKEN = os.environ.get("WHATSAPP_HOOK_TOKEN")
 
-@app.route("/")
+@app.get("/")
 def hello_world():
     return "Hello World!!"
 
 @app.get("/webhook/")
 def subscribe(request: Request):
-    """__summary__: Get message from the webhook"""
-
-    if request.method == "GET":
-        if request.args.get('hub.verify_token') == VERIFY_TOKEN:
-            return request.args.get('hub.challenge')
-        return "Authentication failed. Invalid Token."
+    if request.args.get('hub.verify_token') == VERIFY_TOKEN:
+        return request.args.get('hub.challenge')
+    return "Authentication failed. Invalid Token."
 
 @app.post("/webhook/")
 def process_notifications(request: Request):
@@ -28,7 +25,6 @@ def process_notifications(request: Request):
     response = wtsapp_client.process_webhook_notification(request.get_json())
     print ("We received " + str(response))
     if response["statusCode"] == 200:
-        print ("\n1")
         if response["body"] and response["from_no"]:
             openai_client = OpenAIWrapper()
             reply = openai_client.complete(prompt=response["body"])
