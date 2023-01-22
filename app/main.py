@@ -13,8 +13,8 @@ VERIFY_TOKEN = os.environ.get("WHATSAPP_HOOK_TOKEN")
 def hello_world():
     return "Hello World!!"
 
-@app.route("/webhook/", methods=["POST", "GET"])
-def webhook_whatsapp(request: Request):
+@app.get("/webhook/")
+def subscribe(request: Request):
     """__summary__: Get message from the webhook"""
 
     if request.method == "GET":
@@ -22,6 +22,8 @@ def webhook_whatsapp(request: Request):
             return request.args.get('hub.challenge')
         return "Authentication failed. Invalid Token."
 
+@app.post("/webhook/")
+def process_notifications(request: Request):
     wtsapp_client = WhatsAppWrapper()
     response = wtsapp_client.process_webhook_notification(request.get_json())
     print ("We received " + str(response))
