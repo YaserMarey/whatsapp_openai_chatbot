@@ -2,6 +2,7 @@ import os
 
 from flask import Flask, jsonify, request
 from app.whatsapp_client import WhatsAppWrapper
+from app.openai_client import OpenAIWrapper
 
 app = Flask(__name__)
 
@@ -51,13 +52,14 @@ def webhook_whatsapp():
             return request.args.get('hub.challenge')
         return "Authentication failed. Invalid Token."
 
-    client = WhatsAppWrapper()
-
-    response = client.process_webhook_notification(request.get_json())
+    wtsapp_client = WhatsAppWrapper()
+    response = wtsapp_client.process_webhook_notification(request.get_json())
     print ("We received " + str(response))
-    
-    # Do anything with the response
-    # Send it back for now, should be submitted to ChatGPT
-    # client.send_template_message("hello_world", "en_US", os.environ.get("WHATSAPP_NUMBER_WEBHOOK_TEST"))
+    if response.statusCode == 200:
+        if response.body and response.from_no:
+                  openai_client = OpenAIWrapper()
+                  reply = openai_client.complete(prompt=response.body)
+                  wtsapp_client.send_text_message(to=response.from_no, message=reply)
+                  print ("We replied with " + str(response))
 
     return jsonify({"status": "success"}, 200)

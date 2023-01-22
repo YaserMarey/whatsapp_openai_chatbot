@@ -65,18 +65,18 @@ class WhatsAppWrapper:
             for change in entry["changes"]:
                 value = change["value"]
                 if value:
-                    phone_number_id = value["metadata"]["phone_number_id"]
+                    # phone_number_id = value["metadata"]["phone_number_id"]
                     if "messages" in value:
                         for message in value["messages"]:
                             if message["type"] == "text":
-                                from_ = message["from"]
+                                from_no = message["from"]
                                 message_body = message["text"]["body"]
-                                reply_message = f"Ack from FastAPI-WtsApp Webhook: {message_body}"
-                                client = WhatsAppWrapper()
-                                client.send_text_message(from_, reply_message)
+                                prompt = message_body
+                                print(f"Ack from FastAPI-WtsApp Webhook: {message_body}")
                                 return {
                                     "statusCode": 200,
-                                    "body": json.dumps("Done"),
+                                    "body": json.dump(prompt),
+                                    "from_no": json.dump(from_no),
                                     "isBase64Encoded": False
                                 }
 
