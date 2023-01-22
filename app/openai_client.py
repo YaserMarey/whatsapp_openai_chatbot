@@ -13,12 +13,21 @@ class OpenAIWrapper:
         print ("\nopenai key is" + openai.api_key + " and its type is " + openai.api_type)
 
     def complete(self, prompt):
-
         response = openai.Completion.create(
-            model="text-davinci-003",
-            prompt=prompt,
-            temperature=0.0,
+        model="text-davinci-003",
+        prompt=prompt
+        temperature=0.7,
+        max_tokens=256,
+        top_p=1,
+        frequency_penalty=0,
+        presence_penalty=0
         )
+
+        # response = openai.Completion.create(
+        #     model="text-davinci-003",
+        #     prompt=prompt,
+        #     temperature=0.0,
+        # )
         return response.choices[0].text
 
 if __name__ == "__main__":
