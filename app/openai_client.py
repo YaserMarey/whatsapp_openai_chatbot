@@ -28,6 +28,7 @@ class OpenAIWrapper:
         #     prompt=prompt,
         #     temperature=0.0,
         # )
+        print ("response form openai is :\n" + str(response) + "\n")
         return response.choices[0].text
 
 if __name__ == "__main__":
