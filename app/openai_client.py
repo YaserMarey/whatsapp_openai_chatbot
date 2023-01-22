@@ -1,12 +1,13 @@
 import os
 import requests
 import openai
+from dotenv import load_dotenv
 
 import json
 
+load_dotenv()
 
 class OpenAIWrapper:
-
     def __init__(self):
         openai.api_key = os.environ.get("OPENAI_API_KEY")
 
