@@ -1,11 +1,11 @@
 import os
 import requests
 import openai
-from dotenv import load_dotenv
+# from dotenv import load_dotenv
 
 import json
 
-load_dotenv()
+# load_dotenv()
 
 class OpenAIWrapper:
     def __init__(self):
@@ -22,6 +22,6 @@ class OpenAIWrapper:
 
 if __name__ == "__main__":
     client = OpenAIWrapper()
-    response = client.complete("hello")
+    response = client.complete("how are you")
     print (response)
     
