@@ -22,8 +22,8 @@ def subscribe(request: Request):
 @app.post("/webhook/")
 def process_notifications(request: Request):
     wtsapp_client = WhatsAppWrapper()
-    response = wtsapp_client.process_webhook_notification(request.json())
     print ("We received " + str(response))
+    response = wtsapp_client.process_webhook_notification(request)
     if response["statusCode"] == 200:
         if response["body"] and response["from_no"]:
             openai_client = OpenAIWrapper()
