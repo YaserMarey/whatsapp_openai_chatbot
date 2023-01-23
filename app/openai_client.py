@@ -1,5 +1,4 @@
 import os
-import requests
 import openai
 # from dotenv import load_dotenv
 
@@ -23,11 +22,6 @@ class OpenAIWrapper:
         presence_penalty=0
         )
 
-        # response = openai.Completion.create(
-        #     model="text-davinci-003",
-        #     prompt=prompt,
-        #     temperature=0.0,
-        # )
         print ("response form openai is :\n" + str(response) + "\n")
         return response.choices[0].text
 
