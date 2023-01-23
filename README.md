@@ -3,11 +3,17 @@
 ## Installation
 
 1- Create an account on Heroku
+
 2- Push repo to Heroku
+
 3- Create Facebook Developer Account 
+
 4- Create Facebook App
+
 5- Create Account on OpenAI
+
 6- Set Environment Varialbes 
+
 7- Test webhooks notification processing
 
 ## To test locally:
