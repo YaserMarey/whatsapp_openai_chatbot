@@ -1,10 +1,5 @@
 import os
 import openai
-# from dotenv import load_dotenv
-
-import json
-
-# load_dotenv()
 
 class OpenAIWrapper:
     def __init__(self):

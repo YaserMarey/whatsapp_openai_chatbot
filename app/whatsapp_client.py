@@ -1,21 +1,22 @@
 import os
 import requests
-
 import json
+import config
+
 
 
 class WhatsAppWrapper:
 
     API_URL = "https://graph.facebook.com/v15.0/"
-    API_TOKEN = os.environ.get("WHATSAPP_API_TOKEN")
-    NUMBER_ID = os.environ.get("WHATSAPP_NUMBER_ID")
+    WHATSAPP_API_TOKEN = os.environ.get("WHATSAPP_API_TOKEN")
+    WHATSAPP_CLOUD_NUMBER_ID = os.environ.get("WHATSAPP_CLOUD_NUMBER_ID")
 
     def __init__(self):
         self.headers = {
-            "Authorization": f"Bearer {self.API_TOKEN}",
+            "Authorization": f"Bearer {self.WHATSAPP_API_TOKEN}",
             "Content-Type": "application/json",
         }
-        self.API_URL = self.API_URL + self.NUMBER_ID
+        self.API_URL = self.API_URL + self.WHATSAPP_CLOUD_NUMBER_ID
 
     def send_template_message(self, template_name, language_code, phone_number):
 
@@ -38,10 +39,10 @@ class WhatsAppWrapper:
         return response.status_code
 
 
-    def send_text_message(self,to, message):
+    def send_text_message(self,message, phone_number):
         payload = {
             "messaging_product": 'whatsapp',
-            "to": to,
+            "to": phone_number,
             "type": "text",
             "text": {
                 "preview_url": False,
@@ -89,5 +90,6 @@ class WhatsAppWrapper:
 
 if __name__ == "__main__":
     client = WhatsAppWrapper()
-    client.send_template_message("hello_world", "en_US", os.environ.get("WHATSAPP_NUMBER_WEBHOOK_TEST"))
+    # send a template message
+    client.send_template_message("hello_world", "en_US", "201012345678")
     

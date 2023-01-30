@@ -10,8 +10,8 @@ app = FastAPI()
 VERIFY_TOKEN = os.environ.get("WHATSAPP_HOOK_TOKEN")
 
 @app.get("/")
-def hello_world():
-    return "Hello World!!"
+def I_am_alive():
+    return "I am alive!!"
 
 @app.get("/webhook/")
 def subscribe(request: Request):
@@ -29,8 +29,8 @@ async def process_notifications(request: Request):
         if response["body"] and response["from_no"]:
             openai_client = OpenAIWrapper()
             reply = openai_client.complete(prompt=response["body"])
-            print ("\nreply is "  + reply)
+            print ("\nreply is:"  + reply)
             wtsapp_client.send_text_message(to=response["from_no"], message=reply)
-            print ("We replied with " + str(response))
+            print ("\nreply is sent to whatsapp cloud:" + str(response))
 
     return jsonable_encoder({"status": "success"}, 200)
