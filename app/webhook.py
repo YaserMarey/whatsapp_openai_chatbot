@@ -30,7 +30,7 @@ async def process_notifications(request: Request):
             openai_client = OpenAIWrapper()
             reply = openai_client.complete(prompt=response["body"])
             print ("\nreply is:"  + reply)
-            wtsapp_client.send_text_message(to=response["from_no"], message=reply)
+            wtsapp_client.send_text_message(message=reply, phone_number=response["from_no"], )
             print ("\nreply is sent to whatsapp cloud:" + str(response))
 
     return jsonable_encoder({"status": "success"}, 200)
