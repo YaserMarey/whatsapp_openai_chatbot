@@ -1,9 +1,8 @@
 import os
 import requests
 import json
-import config
-
-
+from dotenv import load_dotenv
+load_dotenv()
 
 class WhatsAppWrapper:
 
