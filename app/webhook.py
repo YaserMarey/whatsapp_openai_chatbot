@@ -16,6 +16,7 @@ def I_am_alive():
 @app.get("/webhook/")
 def subscribe(request: Request):
     if request.query_params.get('hub.verify_token') == VERIFY_TOKEN:
+        print (f"this is request.query_params{request.query_params.get('hub.challenge')}")
         return request.query_params.get('hub.challenge')
     return "Authentication failed. Invalid Token."
 
