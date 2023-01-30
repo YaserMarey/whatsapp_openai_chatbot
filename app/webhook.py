@@ -33,4 +33,4 @@ async def process_notifications(request: Request):
             wtsapp_client.send_text_message(message=reply, phone_number=response["from_no"], )
             print ("\nreply is sent to whatsapp cloud:" + str(response))
 
-    return jsonable_encoder({"status": "success"}, 200)
+    return jsonable_encoder({"status": "success"}, "200")
