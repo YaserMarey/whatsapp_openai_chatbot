@@ -88,6 +88,7 @@ class WhatsAppWrapper:
         }
 
 
+
 if __name__ == "__main__":
     client = WhatsAppWrapper()
     # send a template message
