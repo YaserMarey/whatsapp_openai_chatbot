@@ -65,7 +65,6 @@ class WhatsAppWrapper:
             for change in entry["changes"]:
                 value = change["value"]
                 if value:
-                    # phone_number_id = value["metadata"]["phone_number_id"]
                     if "messages" in value:
                         for message in value["messages"]:
                             if message["type"] == "text":
