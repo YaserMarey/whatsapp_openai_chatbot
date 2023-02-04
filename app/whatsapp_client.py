@@ -1,10 +1,11 @@
 import os
 import requests
 import json
+
 # from dotenv import load_dotenv
 # load_dotenv()
 
-class WhatsAppWrapper:
+class WhatsAppClient:
 
     API_URL = "https://graph.facebook.com/v15.0/"
     WHATSAPP_API_TOKEN = os.environ.get("WHATSAPP_API_TOKEN")
@@ -55,10 +56,7 @@ class WhatsAppWrapper:
         return response.status_code
 
 
-    def process_webhook_notification(self, data):
-        """_summary_: Process webhook notification
-        For the moment, this will return the type of notification
-        """
+    def process_notification(self, data):
         print(str(data))
         entries = data["entry"]
         for entry in entries:
@@ -88,7 +86,9 @@ class WhatsAppWrapper:
 
 
 if __name__ == "__main__":
-    client = WhatsAppWrapper()
+    client = WhatsAppClient()
     # send a template message
     client.send_template_message("hello_world", "en_US", "201012345678")
+    
+    
     

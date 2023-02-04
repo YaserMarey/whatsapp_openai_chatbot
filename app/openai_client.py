@@ -1,7 +1,7 @@
 import os
 import openai
 
-class OpenAIWrapper:
+class OpenAIClient:
     def __init__(self):
         openai.api_key = os.environ.get("OPENAI_API_KEY")
         print ("\nopenai key is" + openai.api_key + " and its type is " + openai.api_type)
@@ -21,7 +21,7 @@ class OpenAIWrapper:
         return response.choices[0].text
 
 if __name__ == "__main__":
-    client = OpenAIWrapper()
+    client = OpenAIClient()
     response = client.complete("how are you")
     print (response)
     
