@@ -9,9 +9,9 @@ app = FastAPI()
 
 WHATSAPP_HOOK_TOKEN = os.environ.get("WHATSAPP_HOOK_TOKEN")
 
-@app.get("/")
-def I_am_alive():
-    return "I am alive!!"
+# @app.get("/")
+# def I_am_alive():
+#     return "I am alive!!"
 
 @app.get("/webhook/")
 def subscribe(request: Request):
